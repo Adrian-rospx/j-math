@@ -21,7 +21,8 @@ public class TriangleArea {
         if(validTriangle(sides)) {
             System.out.println("The triangle is valid");
 
-            double area;
+            double area = calculateArea(sides);
+            System.out.printf("The triangle's area is %.2f cm^2", area);
         }
         else
             System.out.println("The triangle is not valid!");
@@ -40,5 +41,20 @@ public class TriangleArea {
                 return false;
         }
         return true;
+    }
+
+    static double calculateArea(int[] sides) {
+        double semiPerimeter = 0;
+        for(int side : sides) semiPerimeter += side;
+        semiPerimeter /= 2;
+
+        double area = 1;
+        area *= semiPerimeter;
+        for(int side : sides) {
+            area *=  (semiPerimeter - side);
+        }
+        area = Math.sqrt(area);
+
+        return area;
     }
 }
